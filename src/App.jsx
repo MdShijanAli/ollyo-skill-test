@@ -25,8 +25,17 @@ const App = () => {
     setCheckedImages(updatedCheckedImages);
   };
 
+  // console.log(hoveredIndex)
+  // console.log(checkedImages)
+
   return (
     <div>
+      <div>
+        <div>
+          <label htmlFor="selectFile"></label>
+        </div>
+        <div></div>
+      </div>
       <div className="max-w-7xl mx-auto py-20">
         <div className="grid grid-cols-5 gap-5">
           <div className="col-span-2">
@@ -42,22 +51,22 @@ const App = () => {
                   onClick={() => handleImageClick(index + 1)}
                 >
                   <img
-                    className={`border rounded-md transition-opacity ${
-                      index + 1 === hoveredIndex ? 'opacity-50' : 'opacity-100'
-                    }`}
-                    src={src}
-                    alt=""
-                  />
-                  {index + 1 === hoveredIndex && (
-                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-90">
-                      <input
-                        type="checkbox"
-                        className="text-green-500 w-6 h-6"
-                        checked={checkedImages[index + 1]}
-                        onChange={() => handleImageClick(index + 1)}
-                      />
-                    </div>
-                  )}
+          className={`border rounded-md transition-opacity ${
+            (index + 1 === hoveredIndex || checkedImages[index + 1]) ? 'opacity-25' : 'opacity-100'
+          }`}
+          src={src}
+          alt=""
+        />
+                  {(index + 1 === hoveredIndex || checkedImages[index + 1]) && (
+          <div className="absolute top-0 left-0 w-full h-full bg-gray-500 bg-opacity-25">
+            <input
+              type="checkbox"
+              className="text-green-500 w-6 h-6 mt-10 ml-10"
+              checked={checkedImages[index + 1]}
+              onChange={() => handleImageClick(index + 1)}
+            />
+          </div>
+        )}
                 </div>
               </div>
             ))}
@@ -73,22 +82,22 @@ const App = () => {
                   onClick={() => handleImageClick(index + 7)}
                 >
                   <img
-                    className={`border rounded-md transition-opacity ${
-                      index + 7 === hoveredIndex ? 'opacity-50' : 'opacity-100'
-                    }`}
-                    src={src}
-                    alt=""
-                  />
-                  {index + 7 === hoveredIndex && (
-                    <div className="absolute top-0 left-0 w-full h-full flex items-center justify-center bg-gray-800 bg-opacity-90">
-                      <input
-                        type="checkbox"
-                        className="text-green-500 w-6 h-6"
-                        checked={checkedImages[index + 7]}
-                        onChange={() => handleImageClick(index + 7)}
-                      />
-                    </div>
-                  )}
+          className={`border rounded-md transition-opacity ${
+            (index + 7 === hoveredIndex || checkedImages[index + 7]) ? 'opacity-25' : 'opacity-100'
+          }`}
+          src={src}
+          alt=""
+        />
+                 {(index + 7 === hoveredIndex || checkedImages[index + 7]) && (
+          <div className="absolute top-0 left-0 w-full h-full bg-gray-500 bg-opacity-25">
+            <input
+              type="checkbox"
+              className="text-green-500 w-6 h-6 mt-10 ml-10"
+              checked={checkedImages[index + 7]}
+              onChange={() => handleImageClick(index + 7)}
+            />
+          </div>
+        )}
                 </div>
               </div>
             ))}
