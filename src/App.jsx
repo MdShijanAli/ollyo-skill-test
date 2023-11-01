@@ -1,34 +1,57 @@
-import img1 from "./assets/images/image-1.webp";
-import img2 from "./assets/images/image-2.webp";
-import img3 from "./assets/images/image-3.webp";
-import img4 from "./assets/images/image-4.webp";
-import img5 from "./assets/images/image-5.webp";
-import img6 from "./assets/images/image-6.webp";
-import img7 from "./assets/images/image-7.webp";
-import img8 from "./assets/images/image-8.webp";
-import img9 from "./assets/images/image-9.webp";
-import img10 from "./assets/images/image-10.jpeg";
-import img11 from "./assets/images/image-11.jpeg";
 import { BsCardImage } from 'react-icons/bs';
 import { RiDeleteBin5Fill } from 'react-icons/ri';
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const App = () => {
+  const [images, setImages] = useState([])
   const [hoveredIndex, setHoveredIndex] = useState(null);
   const [checkedImages, setCheckedImages] = useState(new Array(11).fill(false)); // Use the total number of images
 
-  const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11];
+  // const images = [img1, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11];
+ 
+  useEffect(() => {
+    fetch('images.json')
+      .then(res => res.json())
+    .then(data=> setImages(data))
+  },[])
+
 
   const handleImageClick = (index) => {
     const updatedCheckedImages = [...checkedImages];
     updatedCheckedImages[index] = !updatedCheckedImages[index];
     setCheckedImages(updatedCheckedImages);
+
+    const clickedImageId = images[index].id;
+  console.log(`Clicked image ID: ${clickedImageId}`);
   };
+
+  const handleDeleteSelectedImages = () => {
+    // Create an array of image IDs to delete
+    const selectedImageIds = checkedImages
+      .map((checked, index) => (checked ? images[index].id : null))
+      .filter((id) => id !== null);
+
+    if (selectedImageIds.length === 0) {
+      // No images selected for deletion
+      return;
+    }
+
+    // Remove selected images from the 'images' state
+    const updatedImages = images.filter((image) => !selectedImageIds.includes(image.id));
+    setImages(updatedImages);
+
+    // Reset the checked state
+    setCheckedImages(new Array(11).fill(false));
+  };
+
+
+
+
 
   // console.log(hoveredIndex)
   const checked = checkedImages.filter(value => value === true).length;
-  console.log(checked)
+  // console.log(checkedImages)
 
   return (
     <div>
@@ -39,7 +62,7 @@ const App = () => {
           <p htmlFor="selectFile" className="text-lg font-semibold">{checked} File Selected</p>
         </div>
         <div>
-          <button><RiDeleteBin5Fill className="w-10 bg-red-300 p-2 rounded-full h-10 text-red-600"/></button>
+          <button onClick={handleDeleteSelectedImages}><RiDeleteBin5Fill className="w-10 bg-red-300 p-2 rounded-full h-10 text-red-600"/></button>
         </div>
       </div>
 
@@ -57,7 +80,7 @@ const App = () => {
       className={`border rounded-md transition-opacity ${
         (hoveredIndex === 0 || checkedImages[0]) ? 'opacity-25' : 'opacity-100'
       }`}
-      src={images[0]}
+      src={images[0]?.img}
       alt=""
     />
     {(hoveredIndex === 0 || checkedImages[0]) && (
@@ -86,7 +109,7 @@ const App = () => {
           className={`border rounded-md transition-opacity ${
             (index + 1 === hoveredIndex || checkedImages[index + 1]) ? 'opacity-25' : 'opacity-100'
           }`}
-          src={src}
+          src={src?.img}
           alt=""
         />
                   {(index + 1 === hoveredIndex || checkedImages[index + 1]) && (
@@ -117,7 +140,7 @@ const App = () => {
           className={`border rounded-md transition-opacity ${
             (index + 7 === hoveredIndex || checkedImages[index + 7]) ? 'opacity-25' : 'opacity-100'
           }`}
-          src={src}
+          src={src?.img}
           alt=""
         />
                  {(index + 7 === hoveredIndex || checkedImages[index + 7]) && (
