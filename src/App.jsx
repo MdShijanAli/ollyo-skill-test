@@ -10,6 +10,7 @@ import img9 from "./assets/images/image-9.webp";
 import img10 from "./assets/images/image-10.jpeg";
 import img11 from "./assets/images/image-11.jpeg";
 import { BsCardImage } from 'react-icons/bs';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
 import { useState } from "react";
 
 
@@ -26,21 +27,52 @@ const App = () => {
   };
 
   // console.log(hoveredIndex)
-  // console.log(checkedImages)
+  const checked = checkedImages.filter(value => value === true).length;
+  console.log(checked)
 
   return (
     <div>
-      <div>
-        <div>
-          <label htmlFor="selectFile"></label>
-        </div>
-        <div></div>
-      </div>
       <div className="max-w-7xl mx-auto py-20">
+      <div className="flex item justify-between mb-10">
+        <div className="flex items-center">
+          <input type="checkbox" name="selectFile" id="selectFile" className="mr-3 w-4 h-4" checked/>
+          <p htmlFor="selectFile" className="text-lg font-semibold">{checked} File Selected</p>
+        </div>
+        <div>
+          <button><RiDeleteBin5Fill className="w-10 bg-red-300 p-2 rounded-full h-10 text-red-600"/></button>
+        </div>
+      </div>
+
+
+      <div>
         <div className="grid grid-cols-5 gap-5">
-          <div className="col-span-2">
-            <img className="border rounded-md" src={images[0]} alt="" />
-          </div>
+        <div className="col-span-2">
+  <div
+    className="relative group"
+    onMouseEnter={() => setHoveredIndex(0)}
+    onMouseLeave={() => setHoveredIndex(null)}
+    onClick={() => handleImageClick(0)}
+  >
+    <img
+      className={`border rounded-md transition-opacity ${
+        (hoveredIndex === 0 || checkedImages[0]) ? 'opacity-25' : 'opacity-100'
+      }`}
+      src={images[0]}
+      alt=""
+    />
+    {(hoveredIndex === 0 || checkedImages[0]) && (
+      <div className="absolute top-0 left-0 w-full h-full bg-gray-500 bg-opacity-25">
+        <input
+          type="checkbox"
+          className="text-green-500 w-6 h-6 mt-10 ml-10"
+          checked={checkedImages[0]}
+          onChange={() => handleImageClick(0)}
+        />
+      </div>
+    )}
+  </div>
+</div>
+
           <div className="col-span-3 grid grid-cols-3 gap-5">
             {images.slice(1, 7).map((src, index) => (
               <div key={index}>
@@ -116,7 +148,8 @@ const App = () => {
             </label>
           </div>
         </div>
-      </div>
+        </div>
+        </div>
     </div>
   );
 };
