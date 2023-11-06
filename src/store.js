@@ -51,27 +51,28 @@ const App = () => {
 
   // console.log(hoveredIndex)
   const checked = checkedImages.filter(value => value === true).length;
-  // console.log(checked)
+  console.log(images)
 
   return (
     <div>
       <div className="max-w-7xl mx-auto py-20">
         {
-          checked ? 
-          <div className="flex item justify-between mb-2">
+          checked? <div className="flex item justify-between ">
           <div className="flex items-center">
-          <input type="checkbox" name="selectFile" id="selectFile" className="mr-3 w-4 h-4" checked/>
-          <p htmlFor="selectFile" className="text-lg font-semibold">{checked} File Selected</p>
-        </div>
-        <div>
-          <button onClick={handleDeleteSelectedImages}><RiDeleteBin5Fill className="w-10 bg-red-300 p-2 rounded-full h-10 text-red-600"/></button>
-        </div>
-            </div> :
-            
-        <h1 className='text-2xl font-semibold mb-2'>Gallery</h1>
-        }
-        
-      <div className='border-2 mb-10'></div>
+            <input type="checkbox" name="selectFile" id="selectFile" className="mr-3 w-4 h-4" checked/>
+            <p htmlFor="selectFile" className="text-lg font-semibold">{checked} File Selected</p>
+          </div>
+          <div>
+            <button onClick={handleDeleteSelectedImages}><RiDeleteBin5Fill className="w-10 bg-red-300 p-2 rounded-full h-10 text-red-600"/></button>
+          </div>
+          </div> :
+            <div>
+              <h1 className='text-2xl font-semibold mb-2'>Gallery</h1>
+            </div>
+      }
+
+
+        <div className='border-b-2 mb-10'></div>
 
 
       <div>

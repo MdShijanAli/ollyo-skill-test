@@ -1,0 +1,44 @@
+
+
+
+.muuri {
+  position: relative;
+/*   display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-auto-rows: 1fr;
+  margin: 0 auto; */
+  
+}
+
+.col {
+  width: 210px;
+  height: 210px; 
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  border: 1px solid #ddd;
+  margin: 5px;
+}
+
+
+.col:nth-child(1){
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+
+
+.muuri-item {
+  z-index: 1;
+}
+.muuri-item-dragging {
+  z-index: 3;
+}
+.muuri-item-releasing {
+  z-index: 2;
+}
+.muuri-item-hidden {
+  z-index: 0;
+}
+
+
