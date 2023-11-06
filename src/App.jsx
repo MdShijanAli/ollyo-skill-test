@@ -129,7 +129,7 @@ const App = () => {
                     alt=""
                   />
                   {(index === hoveredIndex || checkedImages[index]) && (
-                    <div className="absolute top-0 left-0 w-full h-full bg-gray-500 bg-opacity-25">
+                    <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-60">
                       <input
                         type="checkbox"
                         className="text-green-500 w-6 h-6 mt-10 ml-10"
